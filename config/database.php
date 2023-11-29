@@ -63,6 +63,15 @@ return [
             ]) : [],
         ],
 
+        'mysql_only_connect'  => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_HOST', '127.0.0.1'),
+            'port'      => env('DB_PORT', '3306'),
+            'database'  => null,
+            'username'  => env('DB_USERNAME', 'root'),
+            'password'  => env('DB_PASSWORD', '')
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
