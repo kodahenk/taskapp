@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class OoCommand extends Command
 {
@@ -27,7 +28,16 @@ class OoCommand extends Command
     public function handle()
     {
 
-        $this->info('Running custom command...');
+        $this->info('Projec init start');
+
+        if (!File::exists(base_path('.env'))) {
+            // .env.example dosyasını kopyala
+            File::copy(base_path('.env.example'), base_path('.env'));
+
+            // Kullanıcıdan gerekli bilgileri al
+            $this->info('Please provide the necessary information in the .env file.');
+            $this->info('You can edit the .env file directly or run "php artisan key:generate" to generate an application key.');
+        }
 
         $databaseName = config('database.connections.mysql.database');
 
@@ -41,12 +51,13 @@ class OoCommand extends Command
         }
 
         // İstediğiniz Artisan komutlarını buraya ekleyin
+        $this->call('key:generate');
         $this->call('db:wipe');
         $this->call('migrate');
         // $this->call('permissions:sync');
         $this->call('db:seed');
         // $this->call('permissions:sync', ['--policies']);
 
-        $this->info('Custom command completed.');
+        $this->info('Projec init end');
     }
 }
