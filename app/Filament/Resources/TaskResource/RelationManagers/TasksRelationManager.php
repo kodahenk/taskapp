@@ -7,7 +7,10 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -22,6 +25,7 @@ class TasksRelationManager extends RelationManager
             ->schema([
                 TextInput::make('title')->required(),
                 TextInput::make('source')->required(),
+                RichEditor::make('content')->columnSpanFull(),
                 Toggle::make('status'),
             ]);
     }
@@ -31,7 +35,9 @@ class TasksRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('title'),
+                TextColumn::make('title'),
+                TextColumn::make('source'),
+                ToggleColumn::make('status'),
             ])
             ->filters([
                 //

@@ -11,12 +11,12 @@ class Task extends Model
 
     public function parentTask()
     {
-        return $this->belongsTo(Task::class, 'parent_task');
+        return $this->belongsTo(Task::class, 'parent_id');
     }
 
     // Child tasks ilişkisi
     public function childTasks()
     {
-        return $this->hasMany(Task::class, 'parent_task');
+        return $this->hasMany(Task::class, 'parent_id');
     }
 }

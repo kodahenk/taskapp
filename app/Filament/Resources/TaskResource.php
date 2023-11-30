@@ -19,6 +19,7 @@ use Filament\Tables\Columns\TextInputColumn;
 use App\Filament\Resources\TaskResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TaskResource\RelationManagers;
+use Filament\Forms\Components\RichEditor;
 
 class TaskResource extends Resource
 {
@@ -32,7 +33,8 @@ class TaskResource extends Resource
             ->schema([
                 TextInput::make('title')->required(),
                 TextInput::make('source')->required(),
-                Toggle::make('status'),
+                RichEditor::make('content')->columnSpanFull(),
+                Toggle::make('status')->required(),
             ]);
     }
 
@@ -41,13 +43,13 @@ class TaskResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                TextColumn::make('source'),
+                TextColumn::make('source'), 
                 ToggleColumn::make('status'),
             ])
             ->filters([
                 //
             ])
-            ->modifyQueryUsing(fn (Builder $query) => $query->where('parent_task', 0))
+            ->modifyQueryUsing(fn (Builder $query) => $query->where('parent_id', 0))
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('source');
-            $table->integer('parent_task')->default(0);
+            $table->integer('parent_id')->default(0);
+            $table->longText('content')->nullable();
             $table->boolean('status')->default(false);
             $table->timestamps();
         });
