@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->string('description');
-            $table->timestamp('date');
+            $table->dateTime('date');
             $table->decimal('amount', 10, 2);
             $table->enum('type', ['income','income_next', 'expense', 'expense_next'])->default('expense');
             $table->timestamps();

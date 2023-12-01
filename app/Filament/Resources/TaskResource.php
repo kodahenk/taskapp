@@ -43,7 +43,7 @@ class TaskResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                TextColumn::make('source'), 
+                TextColumn::make('source'),
                 ToggleColumn::make('status'),
             ])
             ->filters([
@@ -77,10 +77,5 @@ class TaskResource extends Resource
             'create' => Pages\CreateTask::route('/create'),
             'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
-    }
-
-    public static function getEleouentQuery()
-    {
-        return Task::where('status', 1);
     }
 }

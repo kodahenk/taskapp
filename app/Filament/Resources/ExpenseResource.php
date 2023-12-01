@@ -48,6 +48,7 @@ class ExpenseResource extends Resource
             ->columns([
                 TextColumn::make('description')->label('Açıklama'),
                 TextColumn::make('amount')->label('Miktar'),
+                TextColumn::make('date')->label('Tarih')->dateTime('Y/m/d'),
                 TextColumn::make('type')
                     ->label('Tür')
                     ->badge()
@@ -89,4 +90,6 @@ class ExpenseResource extends Resource
             'edit' => Pages\EditExpense::route('/{record}/edit'),
         ];
     }
+
+
 }
