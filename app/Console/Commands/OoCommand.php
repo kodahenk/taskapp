@@ -30,15 +30,6 @@ class OoCommand extends Command
 
         $this->info('Projec init start');
 
-        if (!File::exists(base_path('.env'))) {
-            // .env.example dosyasını kopyala
-            File::copy(base_path('.env.example'), base_path('.env'));
-
-            // Kullanıcıdan gerekli bilgileri al
-            $this->info('Please provide the necessary information in the .env file.');
-            $this->info('You can edit the .env file directly or run "php artisan key:generate" to generate an application key.');
-        }
-
         $databaseName = config('database.connections.mysql.database');
 
         try {
